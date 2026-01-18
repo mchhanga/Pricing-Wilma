@@ -4,7 +4,9 @@
 import streamlit as st
 
 # ---------- Title ----------
-st.title("Wilmac Technologies Pricing Calculator")
+st.title("SaaS Pricing Calculator")
+st.caption("Estimate annual pricing based on plan, usage, and add-ons")
+
 
 # ---------- Plan Selection ----------
 st.sidebar.header("Step 1: Choose a Plan")
@@ -36,7 +38,13 @@ modalities = {
 
 modality_selected = st.sidebar.multiselect("Select modalities to include", modalities.keys())
 modality_cost = sum([modalities[m] for m in modality_selected])
-st.write("🧩 Modalities Selected:", modality_selected)
+st.markdown("🧩 **Modalities Selected:**")
+
+if modality_selected:
+   st.markdown(" ".join([f"`{m}`" for m in modality_selected]))
+else:
+    st.write("None")
+
 st.write(f"Modality Add-on Cost: ${modality_cost:,.0f}")
 
 # ---------- Compliance & Analytics ----------
